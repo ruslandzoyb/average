@@ -11,7 +11,7 @@ namespace laba7
     {
        static Random r = new Random();
         static int i=0;
-        static double[] avarege;
+       // static double[] avarege;
         static int sum = 0;
         static int[] element;
         static DateTime time1;
@@ -24,7 +24,7 @@ namespace laba7
             threads[0] = new Thread(RandomLoop);
             threads[1] = new Thread(SumCalculate);
              time1 = DateTime.Now;
-            threads[0].Start(250);
+            threads[0].Start(100);
             threads[1].Start();
 
 
@@ -36,13 +36,13 @@ namespace laba7
         static void RandomLoop(object e)
         {
             int end = (int)e;
-            avarege = new double[end+1];
+           
             element = new int[end+1];
             for ( i = 0; i <= end; i++)
             {
-                element[i] = i / 10;// r.Next(1,100000);
+                element[i] =  r.Next(1,500);
               // Console.BackgroundColor = ConsoleColor.Green;
-                Console.WriteLine($" Element {i} = {element[i]} ");
+               Console.WriteLine($" Element {i} = {element[i]} ");
               // Console.ResetColor();
                 Thread.Sleep(50);
             }
@@ -51,24 +51,18 @@ namespace laba7
         static void SumCalculate()
         {
             Thread.Sleep(20);
-            for (; i <= 250; )
+            for (; i <= 100; )
             {
                 sum += element[i];
-                if (i>0)
-                {
-                    avarege[i] = sum / i ;
-                }
-                else
-                {
-                    avarege[i] = 0;
-                }
+                
                 
                // Console.BackgroundColor = ConsoleColor.Red;
-                Console.WriteLine($"Suma {i} = { sum}  Average {avarege[i]} ");
+               Console.WriteLine($"Suma {i} = { sum}  ");
             //  Console.ResetColor();
                 Thread.Sleep(50);
                 
             }
+            Console.WriteLine(sum);
             var time2 = DateTime.Now;
             Console.WriteLine(time2-time1);
             int s=0;
